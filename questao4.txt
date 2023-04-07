@@ -1,0 +1,53 @@
+algoritmo recalculo_boleto
+
+var
+dataVencimento, dataPagamento, dataTemp: data
+valorBoleto, valorJuros, valorMulta, valorTotalJuros: real
+numDias, numDiasUteis: inteiro
+feriado, finalDeSemana: logico
+
+escreva("Digite a data de vencimento do boleto (dd/mm/aaaa): ")
+leia(dataVencimento)
+escreva("Digite a data de pagamento do boleto (dd/mm/aaaa): ")
+leia(dataPagamento)
+escreva("Digite o valor do boleto: ")
+leia(valorBoleto)
+
+valorJuros <- 0
+valorMulta <- 2
+valorTotalJuros <- 0
+dataTemp <- dataVencimento
+
+se dataPagamento < dataVencimento entao
+escreva("Não há cobrança de juros nem multa, pois o pagamento foi anterior à data de vencimento.")
+senao
+numDias <- dataPagamento - dataVencimento
+
+finalDeSemana <- VerificaFinalDeSemana(dataVencimento)
+feriado <- VerificaFeriado(dataVencimento)
+se finalDeSemana ou feriado entao
+numDiasUteis <- 0
+enquanto (finalDeSemana ou feriado) e (dataTemp <= dataPagamento) faca
+dataTemp <- dataTemp + 1
+finalDeSemana <- VerificaFinalDeSemana(dataTemp)
+feriado <- VerificaFeriado(dataTemp)
+se nao feriado e nao finalDeSemana entao
+numDiasUteis <- numDiasUteis + 1
+fimse
+fimenquanto
+
+se numDiasUteis = 1 entao
+  valorJuros <- valorBoleto * 0.03
+  valorTotalJuros <- valorJuros + valorMulta
+senao
+  valorJuros <- valorBoleto * 0.03 * numDiasUteis
+  valorTotalJuros <- valorJuros + valorMulta
+fimse
+
+senao
+valorJuros <- valorBoleto * 0.03 * numDias
+valorTotalJuros <- valorJuros + valorMulta
+fimse
+
+escreva("O valor do boleto recalculado é: R$ ", valorBoleto + valorTotalJuros)
+fimalgoritmo

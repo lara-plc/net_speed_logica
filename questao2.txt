@@ -1,0 +1,39 @@
+algoritmo media_ponderada
+
+var
+codigo: inteiro
+nota1, nota2, nota3, maior_nota, media: real
+inicio
+enquanto verdadeiro faca
+escreva("Digite o código do aluno (ou 0 para encerrar): ")
+leia(codigo)
+se (codigo == 0) entao
+    interrompa 
+fimse
+
+
+escreva("Digite a primeira nota do aluno: ")
+leia(nota1)
+escreva("Digite a segunda nota do aluno: ")
+leia(nota2)
+escreva("Digite a terceira nota do aluno: ")
+leia(nota3)
+
+
+se (nota1 >= nota2 e nota1 >= nota3) entao
+    media = (nota1 * 4 + nota2 * 3 + nota3 * 3) / 10
+senao se (nota2 >= nota1 e nota2 >= nota3) entao
+    media = (nota2 * 4 + nota1 * 3 + nota3 * 3) / 10
+senao
+    media = (nota3 * 4 + nota1 * 3 + nota2 * 3) / 10
+fimse
+
+
+escreva("Aluno ", codigo, ": notas ", nota1, ", ", nota2, " e ", nota3, ". Média: ", media)
+se (media >= 6) entao
+    escreva(" (APROVADO)")
+senao
+    escreva(" (REPROVADO)")
+fimse
+
+fimalgoritmo

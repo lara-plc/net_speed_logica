@@ -1,0 +1,36 @@
+algoritmo "Desconto na Concessionária"
+var
+  continuar: caracter
+  ano: inteiro
+  valor, valor_com_desconto: real
+  total_ate_2000, total_geral: inteiro
+  
+total_ate_2000 <- 0
+total_geral <- 0
+
+repita
+  escreva("Digite o ano do veículo: ")
+  leia(ano)
+  
+  escreva("Digite o valor do veículo: R$")
+  leia(valor)
+  
+  se ano <= 2000 entao
+    valor_com_desconto <- valor * 0.88
+    total_ate_2000 <- total_ate_2000 + 1
+  senao
+    valor_com_desconto <- valor * 0.93
+  fimse
+  
+  escreva("Valor do desconto: R$", valor - valor_com_desconto)
+  escreva("Valor a ser pago: R$", valor_com_desconto)
+  total_geral <- total_geral + 1
+  
+  escreva("Deseja continuar calculando desconto? (S/N) ")
+  leia(continuar)
+ate que continuar = "N"
+
+escreva("Total de carros com ano até 2000: ", total_ate_2000)
+escreva("Total geral de carros: ", total_geral)
+
+fimalgoritmo
